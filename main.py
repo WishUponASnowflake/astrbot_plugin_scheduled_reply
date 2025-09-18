@@ -61,9 +61,6 @@ class ScheduledReplyPlugin(Star):
 
     async def _load_data(self):
         """异步加载数据文件"""
-        if not os.path.exists(self.storage_file):
-            logger.info("数据文件不存在，将使用默认空配置。")
-            return
         
         try:
             with open(self.storage_file, 'r', encoding='utf-8') as f:
@@ -72,13 +69,10 @@ class ScheduledReplyPlugin(Star):
                 self.reply_statistics = data.get("reply_statistics", self.reply_statistics)
         except FileNotFoundError:
             logger.warning("数据文件不存在，将创建新文件")
-             return {}
         except json.JSONDecodeError as e:
             logger.error(f"JSON解析失败: {e}")
-            return {}
         except OSError as e:  # 捕获其他IO相关错误（如权限问题）
             logger.error(f"读取文件失败: {e}")
-            return {}
 
     async def _save_data(self) -> bool:
         """异步保存数据"""
@@ -138,7 +132,7 @@ class ScheduledReplyPlugin(Star):
             await self.context.send_message(session_str, message_chain)
             logger.info(f"向群 {group_id} 发送定时回复成功。")
             return {"success": True, "message": "发送成功"}
-        except requests.exceptions.RequestException as e:
+        except Exception as e:
             error_msg = f"向群 {group_id} 发送定时回复失败: {str(e)}"
             logger.error(error_msg, exc_info=True)
             return {"success": False, "message": error_msg}
