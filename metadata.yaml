@@ -1,5 +1,5 @@
 name: scheduled_reply
-description: 一个强大的定时回复插件，允许您为不同群组设置在每天指定时间发送的特定消息。
+description: 定时回复插件，让你的机器人每天早上八点在群里发早上好
 version: 1.0.0
 author: tacbana
 repo: https://github.com/tacbana/astrbot_plugin_scheduled_reply
