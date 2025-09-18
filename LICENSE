@@ -1,7 +1,8 @@
-                    GNU AFFERO GENERAL PUBLIC LICENSE
+GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 
- Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Copyright (C) 2022-2099 EraAsh
+
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
 
@@ -13,8 +14,8 @@ cooperation with the community in the case of network server software.
 
   The licenses for most software and other practical works are designed
 to take away your freedom to share and change the works.  By contrast,
-our General Public Licenses are intended to guarantee your freedom to
-share and change all versions of a program--to make sure it remains free
+our General Public Licenses are intended to guarantee your freedom
+to share and change all versions of a program--to make sure it remains free
 software for all its users.
 
   When we speak of free software, we are referring to freedom, not
@@ -90,9 +91,9 @@ a computer network, with no transfer of a copy, is not conveying.
 
   An interactive user interface displays "Appropriate Legal Notices"
 to the extent that it includes a convenient and prominently visible
-feature that (1) displays an appropriate copyright notice, and (2)
-tells the user that there is no warranty for the work (except to the
-extent that warranties are provided), that licensees may convey the
+feature that (1) displays an appropriate copyright notice, and (2) tells
+the user that there is no warranty for the work (except to the extent
+that warranties are provided), that licensees may convey the
 work under this License, and how to view a copy of this License.  If
 the interface presents a list of user commands or options, such as a
 menu, a prominent item in the list meets this criterion.
@@ -274,9 +275,9 @@ in one of these ways:
     available for as long as needed to satisfy these requirements.
 
     e) Convey the object code using peer-to-peer transmission, provided
-    you inform other peers where the object code and Corresponding
-    Source of the work are being offered to the general public at no
-    charge under subsection 6d.
+    you inform other peers where the object code and Corresponding Source
+    of the work are being offered to the general public at no charge
+    under subsection 6d.
 
   A separable portion of the object code, whose source code is excluded
 from the Corresponding Source as a System Library, need not be
@@ -440,8 +441,8 @@ for enforcing compliance by third parties with this License.
 
   An "entity transaction" is a transaction transferring control of an
 organization, or substantially all assets of one, or subdividing an
-organization, or merging organizations.  If propagation of a covered
-work results from an entity transaction, each party to that
+organization, or merging organizations.  If propagation of a covered work
+results from an entity transaction, each party to that
 transaction who receives a copy of the work also receives whatever
 licenses to the work the party's predecessor in interest had or could
 give under the previous paragraph, plus a right to possession of the
@@ -555,8 +556,8 @@ permission to link or combine any covered work with a work licensed
 under version 3 of the GNU General Public License into a single
 combined work, and to convey the resulting work.  The terms of this
 License will continue to apply to the part which is the covered work,
-but the work with which it is combined will remain governed by version
-3 of the GNU General Public License.
+but the work with which it is combined will remain governed by version 3
+of the GNU General Public License.
 
   14. Revised Versions of this License.
 
@@ -566,8 +567,8 @@ will be similar in spirit to the present version, but may differ in detail to
 address new problems or concerns.
 
   Each version is given a distinguishing version number.  If the
-Program specifies that a certain numbered version of the GNU Affero General
-Public License "or any later version" applies to it, you have the
+Program specifies that a certain numbered version of the GNU Affero
+General Public License "or any later version" applies to it, you have the
 option of following the terms and conditions either of that numbered
 version or of any later version published by the Free Software
 Foundation.  If the Program does not specify a version number of the
@@ -600,12 +601,12 @@ ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
   IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
 WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS
 THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY
-GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE
-USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF
-DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD
+GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF
+THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS
+OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD
 PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),
-EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGES.
+EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY
+OF SUCH DAMAGES.
 
   17. Interpretation of Sections 15 and 16.
 
@@ -630,7 +631,7 @@ state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
     <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2022-2099 AstrBot Plugin Authors
+    Copyright (C) 2022-2099 EraAsh
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published
