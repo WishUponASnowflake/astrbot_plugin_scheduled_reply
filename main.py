@@ -43,9 +43,9 @@ class ScheduledReplyPlugin(Star):
         try:
             hour, minute, second = map(int, reply_time_str.split(':'))
             self.reply_time = time(hour, minute, second)
-        except:
+        except ValueError:
             self.reply_time = time(9, 0, 0)
-            logger.warning("定时回复时间格式错误，使用默认时间 09:00:00")
+            logger.warning("定时回复时间格式错误，请使用 HH:MM:SS 格式。已使用默认时间 09:00:00")
         
         asyncio.create_task(self._async_init())
     
@@ -70,8 +70,15 @@ class ScheduledReplyPlugin(Star):
                 data = json.load(f)
                 self.scheduled_replies = data.get("scheduled_replies", {})
                 self.reply_statistics = data.get("reply_statistics", self.reply_statistics)
-        except (json.JSONDecodeError, Exception) as e:
-            logger.error(f"加载数据文件失败: {e}", exc_info=True)
+        except FileNotFoundError:
+            logger.warning("数据文件不存在，将创建新文件")
+             return {}
+        except json.JSONDecodeError as e:
+            logger.error(f"JSON解析失败: {e}")
+            return {}
+        except OSError as e:  # 捕获其他IO相关错误（如权限问题）
+            logger.error(f"读取文件失败: {e}")
+            return {}
 
     async def _save_data(self) -> bool:
         """异步保存数据"""
@@ -87,8 +94,8 @@ class ScheduledReplyPlugin(Star):
             os.replace(temp_file, self.storage_file) # 原子操作
             logger.info("定时回复数据已保存。")
             return True
-        except Exception as e:
-            logger.error(f"保存数据文件失败: {e}", exc_info=True)
+        except OSError as e:
+            logger.error(f"写入文件失败: {e}", exc_info=True)
             return False
 
     def _get_local_time(self) -> datetime:
@@ -131,11 +138,11 @@ class ScheduledReplyPlugin(Star):
             await self.context.send_message(session_str, message_chain)
             logger.info(f"向群 {group_id} 发送定时回复成功。")
             return {"success": True, "message": "发送成功"}
-        except Exception as e:
+        except requests.exceptions.RequestException as e:
             error_msg = f"向群 {group_id} 发送定时回复失败: {str(e)}"
             logger.error(error_msg, exc_info=True)
             return {"success": False, "message": error_msg}
-
+        
     async def _notify_admin(self, message: str):
         """通知管理员"""
         if not self.config.get("admin_notification", True):
@@ -146,8 +153,8 @@ class ScheduledReplyPlugin(Star):
         
         try:
             notification_msg = f"定时回复通知\n{message}"
-            session_str = f"default:GroupMessage:{group_id}"
-            message_chain = MessageChain().message(message)
+            session_str = f"default:GroupMessage:{admin_group_id}"
+            message_chain = MessageChain().message(notification_msg)
             await self.context.send_message(session_str, message_chain)
         except Exception as e:
             logger.error(f"通知管理员失败: {e}", exc_info=True)
@@ -199,7 +206,7 @@ class ScheduledReplyPlugin(Star):
                     await self._execute_all_replies()
                     await asyncio.sleep(1) # 短暂休眠，防止CPU占用过高并确保进入下一天的计时
 
-                except Exception as e:
+                except (OSError, requests.exceptions.RequestException) as e:
                     logger.error(f"定时回复任务内部循环出错: {e}", exc_info=True)
                     await self._notify_admin(f"定时回复任务发生严重错误: {e}")
                     await asyncio.sleep(60) # 发生错误后等待60秒再重试
