@@ -25,7 +25,7 @@ class ScheduledReplyPlugin(Star):
         
         self.task: Optional[asyncio.Task] = None
         # 将白名单改为存储群号和对应回复内容的字典
-        self.scheduled_replies: Dict[str, str] = {"早安岛":681772719}
+        self.scheduled_replies: Dict[str, str] = {}
         self.reply_statistics: Dict[str, Any] = {
             "total_replies": 0,
             "success_count": 0,
@@ -146,8 +146,9 @@ class ScheduledReplyPlugin(Star):
         
         try:
             notification_msg = f"定时回复通知\n{message}"
-            session_str = f"aiocqhttp:GROUP:{admin_group_id}"
-            await self.context.send_message(session_str, [Plain(notification_msg)])
+            session_str = f"default:GroupMessage:{group_id}"
+            message_chain = MessageChain().message(message)
+            await self.context.send_message(session_str, message_chain)
         except Exception as e:
             logger.error(f"通知管理员失败: {e}", exc_info=True)
 
@@ -352,6 +353,7 @@ class ScheduledReplyPlugin(Star):
                 self._stop_event.set()
                 if self.task:
                     self.task.cancel()
+                    await asyncio.sleep(0)
                 await self._start_reply_task()
             yield event.chain_result([Plain(f"回复时间已设置为每天 {time_str}")])
         except ValueError:
