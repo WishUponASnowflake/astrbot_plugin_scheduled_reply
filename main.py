@@ -197,10 +197,14 @@ class ScheduledReplyPlugin(Star):
                         pass
                     
                     logger.info("开始执行每日定时回复...")
+                    if self.config.get("random", True):
+                        sleeptime = 3600
+                    else:
+                        sleeptime = 1
                     await self._execute_all_replies()
-                    await asyncio.sleep(1) # 短暂休眠，防止CPU占用过高并确保进入下一天的计时
+                    await asyncio.sleep(sleeptime) # 短暂休眠，防止CPU占用过高并确保进入下一天的计时
 
-                except (OSError, requests.exceptions.RequestException) as e:
+                except OSError as e:
                     logger.error(f"定时回复任务内部循环出错: {e}", exc_info=True)
                     await self._notify_admin(f"定时回复任务发生严重错误: {e}")
                     await asyncio.sleep(60) # 发生错误后等待60秒再重试
