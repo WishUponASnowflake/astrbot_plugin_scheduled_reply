@@ -1,10 +1,4 @@
 {
-  "reply_time": {
-    "description": "每日定时回复的时间",
-    "type": "string",
-    "hint": "格式：HH:MM:SS，例如 09:00:00",
-    "default": "09:00:00"
-  },
   "timezone": {
     "description": "时区设置",
     "type": "int",
@@ -29,10 +23,16 @@
     "hint": "用于接收任务执行通知的管理群号",
     "default": ""
   },
-   "random": {
+  "random": {
     "description": "是否开启小时内随机时间回复",
     "type": "bool",
     "hint": "开启后分秒将在0到59内随机选择",
     "default": false
+  },
+  "http_timeout": {
+    "description": "HTTP请求超时时间(秒)",
+    "type": "int",
+    "hint": "动态内容获取请求的超时时间",
+    "default": 10
   }
 }
