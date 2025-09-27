@@ -279,7 +279,7 @@ class ScheduledReplyPlugin(Star):
         self.tasks.clear()
         self._stop_events.clear()
 
-    # 指令处理函数（需要相应修改）
+    # 指令处理函数
     @filter.command("回复菜单")
     async def reply_menu(self, event: AstrMessageEvent):
         """显示插件的所有可用指令"""
@@ -341,9 +341,9 @@ class ScheduledReplyPlugin(Star):
         if await self._save_data():
             if self.is_active:
                 await self._start_task_for_group(group_id)
-            yield event.chain_result([Plain(f"✅ 添加成功！\n群聊 {group_id} 的定时回复已添加\n时间: {time_str}\n内容: {content}\n任务ID: {task_id}")])
+            yield event.chain_result([Plain(f"添加成功！\n群聊 {group_id} 的定时回复已添加\n时间: {time_str}\n内容: {content}\n任务ID: {task_id}")])
         else:
-            yield event.chain_result([Plain("❌ 添加失败，保存数据时发生错误。")])
+            yield event.chain_result([Plain("添加失败，保存数据时发生错误。")])
 
     @filter.command("添加动态回复")
     async def add_dynamic_reply(self, event: AstrMessageEvent, group_id: str, time_str: str, url: str, auth_header: str = ""):
@@ -411,9 +411,9 @@ class ScheduledReplyPlugin(Star):
             # 重启该群的任务
             if self.is_active:
                 await self._start_task_for_group(group_id)
-            yield event.chain_result([Plain(f"✅ 已成功移除任务 {task_id}")])
+            yield event.chain_result([Plain(f"已成功移除任务 {task_id}")])
         else:
-            yield event.chain_result([Plain("❌ 未找到指定的任务ID")])
+            yield event.chain_result([Plain("未找到指定的任务ID")])
 
     @filter.command("清空回复")
     async def clear_scheduled_replies(self, event: AstrMessageEvent, group_id: str):
@@ -433,7 +433,7 @@ class ScheduledReplyPlugin(Star):
                     self.tasks[f"group_{group_id}"].cancel()
                     del self.tasks[f"group_{group_id}"]
             
-            yield event.chain_result([Plain(f"✅ 已清空群 {group_id} 的所有 {task_count} 个定时回复任务")])
+            yield event.chain_result([Plain(f"已清空群 {group_id} 的所有 {task_count} 个定时回复任务")])
         else:
             yield event.chain_result([Plain(f"群 {group_id} 没有配置任何定时回复任务。")])
 
@@ -566,7 +566,7 @@ class ScheduledReplyPlugin(Star):
             self.reply_statistics["last_reply_time"] = datetime.now().isoformat()
             await self._save_data()
             
-            result_summary = f"✅ 手动执行完成\n群组: {group_id}\n任务数: {len(tasks)}\n成功: {success_count}\n失败: {fail_count}"
+            result_summary = f"手动执行完成\n群组: {group_id}\n任务数: {len(tasks)}\n成功: {success_count}\n失败: {fail_count}"
         else:
             # 执行所有群的任务
             if not self.scheduled_tasks:
@@ -596,7 +596,7 @@ class ScheduledReplyPlugin(Star):
             self.reply_statistics["last_reply_time"] = datetime.now().isoformat()
             await self._save_data()
             
-            result_summary = f"✅ 手动执行完成\n总群组: {len(self.scheduled_tasks)}\n总任务: {len(all_tasks)}\n成功: {success_count}\n失败: {fail_count}"
+            result_summary = f"手动执行完成\n总群组: {len(self.scheduled_tasks)}\n总任务: {len(all_tasks)}\n成功: {success_count}\n失败: {fail_count}"
         
         yield event.chain_result([Plain(result_summary)])
 
@@ -612,7 +612,7 @@ class ScheduledReplyPlugin(Star):
         self.config["enable_auto_reply"] = True
         self.config.save_config()
         await self._start_all_tasks()
-        yield event.chain_result([Plain("✅ 自动回复已开启，所有定时任务已启动。")])
+        yield event.chain_result([Plain("自动回复已开启，所有定时任务已启动。")])
 
     @filter.command("关闭自动回复")
     async def stop_auto_reply(self, event: AstrMessageEvent):
@@ -626,7 +626,7 @@ class ScheduledReplyPlugin(Star):
         self.config["enable_auto_reply"] = False
         self.config.save_config()
         await self._stop_all_tasks()
-        yield event.chain_result([Plain("✅ 自动回复已停止，所有定时任务已取消。")])
+        yield event.chain_result([Plain("自动回复已停止，所有定时任务已取消。")])
 
     @filter.command("测试动态内容")
     async def test_dynamic_content(self, event: AstrMessageEvent, url: str, auth_header: str = ""):
