@@ -127,7 +127,7 @@ class ScheduledReplyPlugin(Star):
         now = self._get_local_time()
         target_time_obj = self._parse_time(task_time)
         
-        if self.config.get("random", True):
+        if False:
             target_time = now.replace(
                 hour=target_time_obj.hour,
                 minute=random.randint(0, 59),
@@ -234,8 +234,9 @@ class ScheduledReplyPlugin(Star):
                 
                 now = self._get_local_time()
                 wait_seconds = (next_time - now).total_seconds()
-                
                 if wait_seconds > 0:
+                    if self.config.get("random", True):
+                        wait_seconds += random.randint(0, 3600)
                     logger.info(f"群 {group_id} 距离下次定时回复还有 {wait_seconds:.1f} 秒 (任务: {next_task.get('task_id', 'unknown')})")
                     
                     try:
@@ -534,8 +535,8 @@ class ScheduledReplyPlugin(Star):
         
         message = (
             f"{status}\n"
-            f"⏰ 随机时间: {'开启' if self.config.get('random', False) else '关闭'}\n"
-            f"⏱ {next_task_info}\n"
+            f"随机时间: {'开启' if self.config.get('random', False) else '关闭'}\n"
+            f"{next_task_info}\n"
             f"{stats_msg}"
         )
         yield event.chain_result([Plain(message)])

@@ -24,9 +24,9 @@
     "default": ""
   },
   "random": {
-    "description": "是否开启小时内随机时间回复",
+    "description": "是否开启随机时间回复",
     "type": "bool",
-    "hint": "开启后分秒将在0到59内随机选择",
+    "hint": "开启后信息发送时间将随机取至设置时间后一小时",
     "default": false
   },
   "http_timeout": {
